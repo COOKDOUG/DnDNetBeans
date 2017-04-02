@@ -32,6 +32,13 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
     private int intBonus = 0;
     private int wisBonus = 0;
     private int chaBonus = 0;
+    private int strSRBonus = 0;
+    private int dexSRBonus = 0;
+    private int conSRBonus = 0;
+    private int intSRBonus = 0;
+    private int wisSRBonus = 0;
+    private int chaSRBonus = 0;
+    private String race = "";
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -82,8 +89,13 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
         intRaceBonus = new javax.swing.JTextField();
         wisRaceBonus = new javax.swing.JTextField();
         chaRaceBonus = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
         racialAdjustmentsTextArea = new javax.swing.JTextArea();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        subRaceTextArea = new javax.swing.JTextArea();
+        raceBonusLabel = new javax.swing.JLabel();
+        subRaceBonusLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,6 +124,16 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
 
         subRaceSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose One" }));
         subRaceSelector.setEnabled(false);
+        subRaceSelector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subRaceSelectorActionPerformed(evt);
+            }
+        });
+        subRaceSelector.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                subRaceSelectorPropertyChange(evt);
+            }
+        });
 
         subRaceLabel.setText("Sub-Race");
 
@@ -347,9 +369,47 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
 
         racialAdjustmentsTextArea.setColumns(20);
         racialAdjustmentsTextArea.setRows(5);
-        jScrollPane1.setViewportView(racialAdjustmentsTextArea);
+        jScrollPane2.setViewportView(racialAdjustmentsTextArea);
 
-        statsTab.addTab("Racial Adjustments", jScrollPane1);
+        subRaceTextArea.setColumns(20);
+        subRaceTextArea.setRows(5);
+        jScrollPane1.setViewportView(subRaceTextArea);
+
+        raceBonusLabel.setText("Race Information");
+
+        subRaceBonusLabel.setText("Sub-Race Information");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(raceBonusLabel)
+                            .addComponent(subRaceBonusLabel))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(raceBonusLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(subRaceBonusLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
+
+        statsTab.addTab("Racial Bonuses", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -381,7 +441,7 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(takeStandardButton)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-            .addComponent(statsTab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(statsTab, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(158, 158, 158)
                 .addComponent(hitPointsLabel)
@@ -438,6 +498,7 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
         setRacialAdjustmentsTextArea();
         setRacialBonuses();
         resetStats();
+        activateSubRace();
     }//GEN-LAST:event_raceSelectorActionPerformed
 
     private void raceSelectorPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_raceSelectorPropertyChange
@@ -445,6 +506,7 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
         setRacialAdjustmentsTextArea();
         setRacialBonuses();
         resetStats();
+        activateSubRace();
     }//GEN-LAST:event_raceSelectorPropertyChange
 
     private void classSelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classSelectorActionPerformed
@@ -456,6 +518,19 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
         // TODO add your handling code here:
         setHPMax();
     }//GEN-LAST:event_classSelectorPropertyChange
+
+    private void subRaceSelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subRaceSelectorActionPerformed
+        // TODO add your handling code here:
+        zeroOutSubRaceBonuses();
+        getSubRaceBonuses();
+        resetRaceBonusText();
+    }//GEN-LAST:event_subRaceSelectorActionPerformed
+
+    private void subRaceSelectorPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_subRaceSelectorPropertyChange
+        // TODO add your handling code here:
+        zeroOutSubRaceBonuses();
+        resetRaceBonusText();
+    }//GEN-LAST:event_subRaceSelectorPropertyChange
 
     /**
      * @param args the command line arguments
@@ -554,13 +629,16 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
         switch(chosenClass){
             case "Fighter":
             case "Paladin":
+                //Fighters and Paladins have 1d10 per level hit die
                 hitDieMax = 10;
                 break;
             case "Cleric":
+            case "Rogue":
+                //Rogues and Clerics have 1d8 per level hit die
                 hitDieMax = 8;
                 break;
             case "Wizard":
-            case "Rogue":
+                // Wizards have 1d6 per level hit die
                 hitDieMax = 6;
                 break;
             default:
@@ -606,39 +684,26 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
 	return Modifier;
     }
     private void setRacialBonuses(){
-        String race = raceSelector.getItemAt(raceSelector.getSelectedIndex());
+        race = raceSelector.getItemAt(raceSelector.getSelectedIndex());
         zeroOutRaceBonuses();
         switch(race){
             case "Human":
                 chaBonus = 2;
                 wisBonus = 1;
-                //Set Fields
-                chaRaceBonus.setText("2");
-                wisRaceBonus.setText("1");
                 break;
             case "Elf":
                 intBonus = 2;
-                dexBonus = 1;
-                //Set Fields
-                intRaceBonus.setText("2");
-                dexRaceBonus.setText("1");
                 break;
             case "Dwarf":
                 conBonus = 2;
-                strBonus = 1;
-                //Set Fields
-                conRaceBonus.setText("2");
-                strRaceBonus.setText("1");
                 break;
             case "Halfling":
                 dexBonus = 2;
-                wisBonus = 1;
-                //Set Fields
-                dexRaceBonus.setText("2");
-                wisRaceBonus.setText("1");
                 break;
             default:
         }
+        //Set Fields
+        resetRaceBonusText();
     }
     private void zeroOutRaceBonuses(){
         strBonus = 0;
@@ -647,42 +712,120 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
         intBonus = 0;
         wisBonus = 0;
         chaBonus = 0;
+        zeroOutRaceBonusTexts();
+    }
+    private void zeroOutSubRaceBonuses(){
+        strSRBonus = 0;
+        dexSRBonus = 0;
+        conSRBonus = 0;
+        intSRBonus = 0;
+        wisSRBonus = 0;
+        chaSRBonus = 0;
+        zeroOutRaceBonusTexts();
+    }
+    private void setRacialAdjustmentsTextArea(){
+        race = raceSelector.getItemAt(raceSelector.getSelectedIndex());
+        switch(race){
+            case "Human":
+                racialAdjustmentsTextArea.setText("Human\n\n"
+                + "Humans have the following bonuses:\n"
+                +"-Increase Charisma by 2 and increase Wisdom by 1\n"
+                +"-Start the game with an additional 50 gold\n"
+                +"-Increase Charisma Saving Throws by 1");
+                break;
+            case "Elf":
+                racialAdjustmentsTextArea.setText("Elf\n\n"
+                + "Elves have the following bonuses:\n"
+                +"-Increase Intellect by 2\n"
+                +"-You have both Nightvision and Darkvision\n"
+                +"-Increase Dexterity Saving Throws by 1");
+                break;
+            case "Dwarf":
+                racialAdjustmentsTextArea.setText("Dwarf\n\n"
+                + "Dwarves have the following bonuses:\n"
+                +"-Increase Constitution by 2\n"
+                +"-Each level increases your hit point total by 1\n"
+                +"-Increase Strength Saving Throws by 1");
+                break;
+            case "Halfling":
+                racialAdjustmentsTextArea.setText("Halfling\n\n"
+                + "Halflings have the following bonuses:\n"
+                +"-Increase Dexterity by 2\n"
+                +"-You start the game with an additional skill\n"
+                +"-Increase Wisdom Saving Throws by 1");
+                break;
+            default:
+        }
+    }
+    private void getSubRaceBonuses(){
+        race = raceSelector.getItemAt(raceSelector.getSelectedIndex());
+        String subRace = subRaceSelector.getItemAt(subRaceSelector.getSelectedIndex());
+        switch(race){
+            case "Human":
+                //Humans have no subRace but could in the future.
+                break;
+            case "Elf":
+                if (subRace.equals("Wood Elf")){
+                    subRaceTextArea.setText("Wood Elf\n\n"
+                    +"Wood Elves have the following bonuses:\n"
+                    +"-Increase Dexterity by 1\n"
+                    +"-Wood Elves have increased movement based on their Dexterity Save\n"
+                    +"-Increase resistance to nature damage");
+                    dexSRBonus = 1;
+                } else if (subRace.equals("High Elf")){
+                    subRaceTextArea.setText("High Elf\n\n"
+                    + "High Elves have the following bonuses:\n"
+                    +"-Increase Wisdom by 1\n"
+                    +"-Rest requires half the time as other sub-races\n"
+                    +"-Increase resistance to arcane damage");
+                    wisSRBonus = 1;
+                }
+                break;
+            case "Dwarf":
+                if (subRace.equals("Hill Dwarf")){
+                    subRaceTextArea.setText("Hill Dwarf\n\n"
+                    + "Hill Dwarves have the following bonuses:\n"
+                    +"-Increase Strength by 1\n"
+                    +"-Each level increases your hit point total by 1\n"
+                    +"-Increased resistance to poison and necrotic damage");
+                    strSRBonus = 1;
+                } else if (subRace.equals("Firebeard")){
+                    subRaceTextArea.setText("Firebeards\n\n"
+                    + "FireBeards have the following bonuses:\n"
+                    +"-Increase Charisma by 1\n"
+                    +"-They can cast lvl 1 burning hands once per rest\n"
+                    +"-Increase resistance to fire damage");
+                    chaSRBonus = 1;
+                }
+                break;
+            case "Halfling":
+                if (subRace.equals("Sainted")){
+                    subRaceTextArea.setText("Sainted Halfling\n\n"
+                    + "Sainted Halflings have the following bonuses:\n"
+                    +"-Increase Intellect by 1\n"
+                    +"-You have a radiant breath weapon\n"
+                    +"-Increased resistance to radiant damage");
+                    intSRBonus = 1;
+                } else if (subRace.equals("Quicklings")){
+                    subRaceTextArea.setText("Halfling\n\n"
+                    + "Quicklings have the following bonuses:\n"
+                    +"-Increase Constitution by 1\n"
+                    +"-You start the game with an additional skill\n"
+                    +"-Reduced chance of being hit by projectiles by 1");
+                    conSRBonus = 1;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    private void zeroOutRaceBonusTexts(){
         strRaceBonus.setText("0");
         dexRaceBonus.setText("0");
         conRaceBonus.setText("0");
         intRaceBonus.setText("0");
         wisRaceBonus.setText("0");
         chaRaceBonus.setText("0");
-    }
-    private void setRacialAdjustmentsTextArea(){
-        String race = raceSelector.getItemAt(raceSelector.getSelectedIndex());
-        switch(race){
-            case "Human":
-                racialAdjustmentsTextArea.setText("Human\n\nHumans have the following bonuses:\n"
-                +"-Increase Charisma by 2 and increase Wisdom by 1\n"
-                +"-Start the game with an additional 50 gold\n"
-                +"-Increase Charisma Saving Throws by 1");
-                break;
-            case "Elf":
-                racialAdjustmentsTextArea.setText("Elf\n\nElves have the following bonuses:\n"
-                +"-Increase Intellect by 2 and increase Dexterity by 1\n"
-                +"-You have both Nightvision and Darkvision\n"
-                +"-Increase Dexterity Saving Throws by 1");
-                break;
-            case "Dwarf":
-                racialAdjustmentsTextArea.setText("Dwarf\n\nDwarves have the following bonuses:\n"
-                +"-Increase Constitution by 2 and Strength by 1\n"
-                +"-Each level increases your hit point total by 1\n"
-                +"-Increase Strength Saving Throws by 1");
-                break;
-            case "Halfling":
-                racialAdjustmentsTextArea.setText("Halfling\n\nHalfilings have the following bonuses:\n"
-                +"-Increase Dexterity by 2 and Wisdom by 1\n"
-                +"-You start the game with an additional skill\n"
-                +"-Increase Wisdom Saving Throws by 1");
-                break;
-            default:
-        }
     }
     private void resetStats(){
         //Used to set the new stats
@@ -692,6 +835,31 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
         intellectField.setText(Integer.toString(intBaseVal + intBonus));
         wisdomField.setText(Integer.toString(wisBaseVal + wisBonus));
         charismaField.setText(Integer.toString(chaBaseVal + chaBonus));
+    }
+    private void resetRaceBonusText(){
+        //Used to set the new stats
+        strRaceBonus.setText(Integer.toString(strBonus + strSRBonus));
+        dexRaceBonus.setText(Integer.toString(dexBonus + dexSRBonus));
+        conRaceBonus.setText(Integer.toString(conBonus + conSRBonus));
+        intRaceBonus.setText(Integer.toString(intBonus + intSRBonus));
+        wisRaceBonus.setText(Integer.toString(wisBonus + wisSRBonus));
+        chaRaceBonus.setText(Integer.toString(chaBonus + chaSRBonus));
+    }
+    private void activateSubRace(){
+        switch(race){
+            case "Elf":
+                subRaceSelector.addItem("Wood Elf");
+                subRaceSelector.addItem("High Elf");
+            case "Dwarf":
+            case "Halfling":
+                subRaceSelector.setEnabled(true);
+                break;
+            case "Human":
+                subRaceSelector.setEnabled(false);
+                break;
+            default:
+                break;
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -715,10 +883,13 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
     private javax.swing.JTextField intRaceBonus;
     private javax.swing.JTextField intellectField;
     private javax.swing.JLabel intellectLabel;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel modifierLabel;
     private javax.swing.JTextField name;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JLabel raceBonusLabel;
     private javax.swing.JLabel raceLabel;
     private javax.swing.JComboBox<String> raceSelector;
     private javax.swing.JTextArea racialAdjustmentsTextArea;
@@ -730,8 +901,10 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
     private javax.swing.JTextField strRaceBonus;
     private javax.swing.JTextField strengthField;
     private javax.swing.JLabel strengthLabel;
+    private javax.swing.JLabel subRaceBonusLabel;
     private javax.swing.JLabel subRaceLabel;
     private javax.swing.JComboBox<String> subRaceSelector;
+    private javax.swing.JTextArea subRaceTextArea;
     private javax.swing.JButton takeStandardButton;
     private javax.swing.JTextField wisModField;
     private javax.swing.JTextField wisRaceBonus;
