@@ -524,12 +524,18 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
         zeroOutSubRaceBonuses();
         getSubRaceBonuses();
         resetRaceBonusText();
+        resetStats();
+        //Set Modifiers
+        setModifiers();
     }//GEN-LAST:event_subRaceSelectorActionPerformed
 
     private void subRaceSelectorPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_subRaceSelectorPropertyChange
         // TODO add your handling code here:
         zeroOutSubRaceBonuses();
         resetRaceBonusText();
+        resetStats();
+        //Set Modifiers
+        setModifiers();
     }//GEN-LAST:event_subRaceSelectorPropertyChange
 
     /**
@@ -829,12 +835,12 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
     }
     private void resetStats(){
         //Used to set the new stats
-        strengthField.setText(Integer.toString(strBaseVal + strBonus));
-        dexterityField.setText(Integer.toString(dexBaseVal + dexBonus));
-        constitutionField.setText(Integer.toString(conBaseVal + conBonus));
-        intellectField.setText(Integer.toString(intBaseVal + intBonus));
-        wisdomField.setText(Integer.toString(wisBaseVal + wisBonus));
-        charismaField.setText(Integer.toString(chaBaseVal + chaBonus));
+        strengthField.setText(Integer.toString(strBaseVal + strBonus + strSRBonus));
+        dexterityField.setText(Integer.toString(dexBaseVal + dexBonus + dexSRBonus));
+        constitutionField.setText(Integer.toString(conBaseVal + conBonus + conSRBonus));
+        intellectField.setText(Integer.toString(intBaseVal + intBonus + intSRBonus));
+        wisdomField.setText(Integer.toString(wisBaseVal + wisBonus + wisSRBonus));
+        charismaField.setText(Integer.toString(chaBaseVal + chaBonus + chaSRBonus));
     }
     private void resetRaceBonusText(){
         //Used to set the new stats
