@@ -856,15 +856,35 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
             case "Elf":
                 subRaceSelector.addItem("Wood Elf");
                 subRaceSelector.addItem("High Elf");
+                clearSubRace();
+                subRaceSelector.setEnabled(true);
+                break;
             case "Dwarf":
+                subRaceSelector.addItem("Hill Dwarf");
+                subRaceSelector.addItem("Firebeard");
+                clearSubRace();
+                subRaceSelector.setEnabled(true);
+                break;
             case "Halfling":
+                subRaceSelector.addItem("Sainted");
+                subRaceSelector.addItem("Quicklings");
+                clearSubRace();
                 subRaceSelector.setEnabled(true);
                 break;
             case "Human":
+                clearSubRace();
                 subRaceSelector.setEnabled(false);
                 break;
             default:
+                clearSubRace();
+                subRaceSelector.setEnabled(false);
                 break;
+        }
+    }
+    private void clearSubRace(){
+        if (subRaceSelector.isEnabled()){
+            subRaceSelector.removeItemAt(1);
+            subRaceSelector.removeItemAt(1);
         }
     }
 
