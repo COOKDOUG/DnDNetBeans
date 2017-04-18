@@ -38,6 +38,7 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
     private int intSRBonus = 0;
     private int wisSRBonus = 0;
     private int chaSRBonus = 0;
+    private int raceHPBonus = 0;
     private String race = "";
 
     /**
@@ -96,6 +97,7 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
         subRaceTextArea = new javax.swing.JTextArea();
         raceBonusLabel = new javax.swing.JLabel();
         subRaceBonusLabel = new javax.swing.JLabel();
+        acceptButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -411,6 +413,13 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
 
         statsTab.addTab("Racial Bonuses", jPanel1);
 
+        acceptButton.setText("Accept");
+        acceptButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                acceptButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -418,35 +427,39 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(classLabel)
-                    .addComponent(raceLabel))
+                    .addComponent(classLabel))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(classSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(raceSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(subRaceLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(subRaceSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(rollButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(takeStandardButton)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                        .addComponent(rollButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(takeStandardButton)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(raceLabel)
+                .addGap(18, 18, 18)
+                .addComponent(raceSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(subRaceLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(subRaceSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(statsTab, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(158, 158, 158)
-                .addComponent(hitPointsLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(hpValue, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(158, 158, 158)
+                        .addComponent(hitPointsLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(hpValue, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(160, 160, 160)
+                        .addComponent(acceptButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -461,19 +474,21 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(classSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(classLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(raceSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(raceLabel)
                     .addComponent(subRaceLabel)
                     .addComponent(subRaceSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(hpValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(hitPointsLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statsTab, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(acceptButton)
+                .addGap(58, 58, 58))
         );
 
         pack();
@@ -537,6 +552,10 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
         //Set Modifiers
         setModifiers();
     }//GEN-LAST:event_subRaceSelectorPropertyChange
+
+    private void acceptButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_acceptButtonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_acceptButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -795,11 +814,12 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
                     +"-Each level increases your hit point total by 1\n"
                     +"-Increased resistance to poison and necrotic damage");
                     strSRBonus = 1;
+                    raceHPBonus = 1;
                 } else if (subRace.equals("Firebeard")){
                     subRaceTextArea.setText("Firebeards\n\n"
                     + "FireBeards have the following bonuses:\n"
                     +"-Increase Charisma by 1\n"
-                    +"-They can cast lvl 1 burning hands once per rest\n"
+                    +"-Cast lvl 1 burning hands once per rest\n"
                     +"-Increase resistance to fire damage");
                     chaSRBonus = 1;
                 }
@@ -812,8 +832,8 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
                     +"-You have a radiant breath weapon\n"
                     +"-Increased resistance to radiant damage");
                     intSRBonus = 1;
-                } else if (subRace.equals("Quicklings")){
-                    subRaceTextArea.setText("Halfling\n\n"
+                } else if (subRace.equals("Quickling")){
+                    subRaceTextArea.setText("Quickling\n\n"
                     + "Quicklings have the following bonuses:\n"
                     +"-Increase Constitution by 1\n"
                     +"-You start the game with an additional skill\n"
@@ -834,7 +854,12 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
         chaRaceBonus.setText("0");
     }
     private void resetStats(){
-        //Used to set the new stats
+        /*
+            Used to set the new stats
+            BaseVal is the rolled stat
+            Bonus is the Racial Bonus
+            SRBonus is the SubRace Bonus
+        */
         strengthField.setText(Integer.toString(strBaseVal + strBonus + strSRBonus));
         dexterityField.setText(Integer.toString(dexBaseVal + dexBonus + dexSRBonus));
         constitutionField.setText(Integer.toString(conBaseVal + conBonus + conSRBonus));
@@ -885,10 +910,15 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
         if (subRaceSelector.isEnabled()){
             subRaceSelector.removeItemAt(1);
             subRaceSelector.removeItemAt(1);
+            subRaceTextArea.setText("");
         }
+    }
+    private void createCharacter(){
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton acceptButton;
     private javax.swing.JTextField chaModField;
     private javax.swing.JTextField chaRaceBonus;
     private javax.swing.JTextField charismaField;
