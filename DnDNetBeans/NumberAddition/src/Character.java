@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Character;
+import java.util.HashMap;
 
 /**
  *
@@ -16,6 +17,7 @@ public class Character {
     
     private int maxHitPoints;
     private int currentHitPoints;
+    private int raceHPBonus;
     private int strength;
     private int dexterity;
     private int intelligence;
@@ -57,63 +59,82 @@ public class Character {
     private int tempCON;
     private int tempCHA;
     
+    //Constructor
+    public Character(HashMap<String, String> incCharacterInfo, HashMap<String, Integer> incCharacterStats){
+        setName(incCharacterInfo.get("name"));
+        setRace(incCharacterInfo.get("race"));
+        setRaceHPBonus(incCharacterStats.get("raceHPBonus"));
+    }
+    
+    //Setting the name
+    private void setName(String incName){
+        name = incName;
+    }
+    //Setting the Race
+    private void setRace(String incRace){
+        race = incRace;
+    }
+    // Setting Race HP Bonus
+    private void setRaceHPBonus(int incRaceHPBonus){
+        raceHPBonus = incRaceHPBonus;
+    }
     // Setting the base stats
-    private void setBaseStrength(int incSTR){
+    public void setBaseStrength(int incSTR){
         baseSTR = incSTR;
     }
-    private void setBaseDexterity(int incDEX){
+    public void setBaseDexterity(int incDEX){
         baseDEX = incDEX;
     }
-    private void setBaseIntelligence(int incINT){
+    public void setBaseIntelligence(int incINT){
         baseINT = incINT;
     }
-    private void setBaseWisdom(int incWIS){
+    public void setBaseWisdom(int incWIS){
         baseWIS = incWIS;
     }
-    private void setBaseConstitution(int incCON){
+    public void setBaseConstitution(int incCON){
         baseCON = incCON;
     }
-    private void setBaseCharisma(int incCHA){
+    public void setBaseCharisma(int incCHA){
         baseCHA = incCHA;
     }
     
     // Setting the Racial Stats
-    private void setRaceStrength(int incRaceSTR){
+    public void setRaceStrength(int incRaceSTR){
         raceSTRBonus = incRaceSTR;
     }
-    private void setRaceDexterity(int incRaceDEX){
+    public void setRaceDexterity(int incRaceDEX){
         raceDEXBonus = incRaceDEX;
     }
-    private void setRaceIntelligence(int incRaceINT){
+    public void setRaceIntelligence(int incRaceINT){
         raceINTBonus = incRaceINT;
     }
-    private void setRaceWisdom(int incRaceWIS){
+    public void setRaceWisdom(int incRaceWIS){
         raceWISBonus = incRaceWIS;
     }
-    private void setRaceConstitution(int incRaceCON){
+    public void setRaceConstitution(int incRaceCON){
         raceCONBonus = incRaceCON;
     }
-    private void setRaceCharisma(int incRaceCHA){
+    public void setRaceCharisma(int incRaceCHA){
         raceCHABonus = incRaceCHA;
     }
     
     // Setting the Sub-Racial Stats
-    private void setSubRaceStrength(int incSubRaceSTR){
+    public void setSubRaceStrength(int incSubRaceSTR){
         srSTRBonus = incSubRaceSTR;
     }
-    private void setSubRaceDexterity(int incSubRaceDEX){
+    public void setSubRaceDexterity(int incSubRaceDEX){
         srDEXBonus = incSubRaceDEX;
     }
-    private void setSubRaceIntelligence(int incSubRaceINT){
+    public void setSubRaceIntelligence(int incSubRaceINT){
         srINTBonus = incSubRaceINT;
     }
-    private void setSubRaceWisdom(int incSubRaceWIS){
+    public void setSubRaceWisdom(int incSubRaceWIS){
         srWISBonus = incSubRaceWIS;
     }
-    private void setSubRaceConstitution(int incSubRaceCON){
+    public void setSubRaceConstitution(int incSubRaceCON){
         srCONBonus = incSubRaceCON;
     }
-    private void setSubRaceCharisma(int incSubRaceCHA){
+    public void setSubRaceCharisma(int incSubRaceCHA){
         srCHABonus = incSubRaceCHA;
     }
     
