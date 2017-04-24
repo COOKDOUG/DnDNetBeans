@@ -61,9 +61,31 @@ public class Character {
     
     //Constructor
     public Character(HashMap<String, String> incCharacterInfo, HashMap<String, Integer> incCharacterStats){
+        //Strings
         setName(incCharacterInfo.get("name"));
         setRace(incCharacterInfo.get("race"));
+        //Integers
         setRaceHPBonus(incCharacterStats.get("raceHPBonus"));
+        setBaseStrength(incCharacterStats.get("strBaseVal"));
+        setBaseDexterity(incCharacterStats.get("dexBaseVal"));
+        setBaseIntelligence(incCharacterStats.get("intBaseVal"));
+        setBaseWisdom(incCharacterStats.get("wisBaseVal"));
+        setBaseConstitution(incCharacterStats.get("conBaseVal"));
+        setBaseCharisma(incCharacterStats.get("chaBaseVal"));
+        //Setting Race Stats
+        setRaceStrength(incCharacterStats.get("strBonus"));
+        setRaceDexterity(incCharacterStats.get("dexBonus"));
+        setRaceIntelligence(incCharacterStats.get("intBonus"));
+        setRaceWisdom(incCharacterStats.get("wisBonus"));
+        setRaceConstitution(incCharacterStats.get("conBonus"));
+        setRaceCharisma(incCharacterStats.get("chaBonus"));
+        //Setting Sub-Race Stats
+        setSubRaceStrength(incCharacterStats.get("strSRBonus"));
+        setSubRaceDexterity(incCharacterStats.get("dexSRBonus"));
+        setSubRaceIntelligence(incCharacterStats.get("intSRBonus"));
+        setSubRaceWisdom(incCharacterStats.get("wisSRBonus"));
+        setSubRaceConstitution(incCharacterStats.get("conSRBonus"));
+        setSubRaceCharisma(incCharacterStats.get("chaSRBonus"));
     }
     
     //Setting the name
@@ -79,62 +101,62 @@ public class Character {
         raceHPBonus = incRaceHPBonus;
     }
     // Setting the base stats
-    public void setBaseStrength(int incSTR){
+    private void setBaseStrength(int incSTR){
         baseSTR = incSTR;
     }
-    public void setBaseDexterity(int incDEX){
+    private void setBaseDexterity(int incDEX){
         baseDEX = incDEX;
     }
-    public void setBaseIntelligence(int incINT){
+    private void setBaseIntelligence(int incINT){
         baseINT = incINT;
     }
-    public void setBaseWisdom(int incWIS){
+    private void setBaseWisdom(int incWIS){
         baseWIS = incWIS;
     }
-    public void setBaseConstitution(int incCON){
+    private void setBaseConstitution(int incCON){
         baseCON = incCON;
     }
-    public void setBaseCharisma(int incCHA){
+    private void setBaseCharisma(int incCHA){
         baseCHA = incCHA;
     }
     
     // Setting the Racial Stats
-    public void setRaceStrength(int incRaceSTR){
+    private void setRaceStrength(int incRaceSTR){
         raceSTRBonus = incRaceSTR;
     }
-    public void setRaceDexterity(int incRaceDEX){
+    private void setRaceDexterity(int incRaceDEX){
         raceDEXBonus = incRaceDEX;
     }
-    public void setRaceIntelligence(int incRaceINT){
+    private void setRaceIntelligence(int incRaceINT){
         raceINTBonus = incRaceINT;
     }
-    public void setRaceWisdom(int incRaceWIS){
+    private void setRaceWisdom(int incRaceWIS){
         raceWISBonus = incRaceWIS;
     }
-    public void setRaceConstitution(int incRaceCON){
+    private void setRaceConstitution(int incRaceCON){
         raceCONBonus = incRaceCON;
     }
-    public void setRaceCharisma(int incRaceCHA){
+    private void setRaceCharisma(int incRaceCHA){
         raceCHABonus = incRaceCHA;
     }
     
     // Setting the Sub-Racial Stats
-    public void setSubRaceStrength(int incSubRaceSTR){
+    private void setSubRaceStrength(int incSubRaceSTR){
         srSTRBonus = incSubRaceSTR;
     }
-    public void setSubRaceDexterity(int incSubRaceDEX){
+    private void setSubRaceDexterity(int incSubRaceDEX){
         srDEXBonus = incSubRaceDEX;
     }
-    public void setSubRaceIntelligence(int incSubRaceINT){
+    private void setSubRaceIntelligence(int incSubRaceINT){
         srINTBonus = incSubRaceINT;
     }
-    public void setSubRaceWisdom(int incSubRaceWIS){
+    private void setSubRaceWisdom(int incSubRaceWIS){
         srWISBonus = incSubRaceWIS;
     }
-    public void setSubRaceConstitution(int incSubRaceCON){
+    private void setSubRaceConstitution(int incSubRaceCON){
         srCONBonus = incSubRaceCON;
     }
-    public void setSubRaceCharisma(int incSubRaceCHA){
+    private void setSubRaceCharisma(int incSubRaceCHA){
         srCHABonus = incSubRaceCHA;
     }
     
