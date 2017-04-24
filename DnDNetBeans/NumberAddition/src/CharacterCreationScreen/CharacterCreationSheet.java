@@ -6,6 +6,8 @@
 package CharacterCreationScreen;
 
 import dice.d6;
+import Character.Character;
+import java.util.HashMap;
 
 /**
  *
@@ -40,6 +42,9 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
     private int chaSRBonus = 0;
     private int raceHPBonus = 0;
     private String race = "";
+    private String characterName = "";
+    private HashMap<String, Integer> createCharacterStats;
+    private HashMap<String, String> createCharacterInformation;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -104,6 +109,11 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
         nameLabel.setText("Name");
 
         name.setText("Enter your name");
+        name.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                nameMouseExited(evt);
+            }
+        });
         name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nameActionPerformed(evt);
@@ -555,7 +565,13 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
 
     private void acceptButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_acceptButtonMouseClicked
         // TODO add your handling code here:
+        createCharacter();
     }//GEN-LAST:event_acceptButtonMouseClicked
+
+    private void nameMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameMouseExited
+        // TODO add your handling code here:
+        characterName = name.toString();
+    }//GEN-LAST:event_nameMouseExited
 
     /**
      * @param args the command line arguments
@@ -914,7 +930,40 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
         }
     }
     private void createCharacter(){
+        //Creating the Integer Array for the Character Class
+        createCharacterStats.put("raceHPBonus",raceHPBonus);
+        //Setting Base Stats
+        createCharacterStats.put("strBaseVal",strBaseVal);
+        createCharacterStats.put("dexBaseVal",dexBaseVal);
+        createCharacterStats.put("intBaseVal",intBaseVal);
+        createCharacterStats.put("wisBaseVal",wisBaseVal);
+        createCharacterStats.put("conBaseVal",conBaseVal);
+        createCharacterStats.put("chaBaseVal",chaBaseVal);
+        //Setting Race Stats
+        createCharacterStats.put("strBonus",strBonus);
+        createCharacterStats.put("dexBonus",dexBonus);
+        createCharacterStats.put("intBonus",intBonus);
+        createCharacterStats.put("wisBonus",wisBonus);
+        createCharacterStats.put("conBonus",conBonus);
+        createCharacterStats.put("chaBonus",chaBonus);
+        //Setting Sub-Race Stats
+        createCharacterStats.put("strSRBonus",strSRBonus);
+        createCharacterStats.put("dexSRBonus",dexSRBonus);
+        createCharacterStats.put("intSRBonus",intSRBonus);
+        createCharacterStats.put("wisSRBonus",wisSRBonus);
+        createCharacterStats.put("conSRBonus",conSRBonus);
+        createCharacterStats.put("chaSRBonus",chaSRBonus);
         
+        //Creating the String Array for the Character Class
+        createCharacterInformation.put("name",name.toString());
+        createCharacterInformation.put("race", race);
+        Character createdCharacter = new Character(createCharacterInformation, createCharacterStats);
+        /*
+            hitDieMax;
+            maxHitPoints;
+            currentHitPoints;
+        */
+    
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
