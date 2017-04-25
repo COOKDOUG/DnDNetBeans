@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Character;
+import java.util.HashMap;
 
 /**
  *
@@ -16,6 +17,7 @@ public class Character {
     
     private int maxHitPoints;
     private int currentHitPoints;
+    private int raceHPBonus;
     private int strength;
     private int dexterity;
     private int intelligence;
@@ -57,6 +59,48 @@ public class Character {
     private int tempCON;
     private int tempCHA;
     
+    //Constructor
+    public Character(HashMap<String, String> incCharacterInfo, HashMap<String, Integer> incCharacterStats){
+
+        //Strings
+        setName(incCharacterInfo.get("name"));
+        setRace(incCharacterInfo.get("race"));
+        //Integers
+        setRaceHPBonus(incCharacterStats.get("raceHPBonus"));
+        setBaseStrength(incCharacterStats.get("strBaseVal"));
+        setBaseDexterity(incCharacterStats.get("dexBaseVal"));
+        setBaseIntelligence(incCharacterStats.get("intBaseVal"));
+        setBaseWisdom(incCharacterStats.get("wisBaseVal"));
+        setBaseConstitution(incCharacterStats.get("conBaseVal"));
+        setBaseCharisma(incCharacterStats.get("chaBaseVal"));
+        //Setting Race Stats
+        setRaceStrength(incCharacterStats.get("strBonus"));
+        setRaceDexterity(incCharacterStats.get("dexBonus"));
+        setRaceIntelligence(incCharacterStats.get("intBonus"));
+        setRaceWisdom(incCharacterStats.get("wisBonus"));
+        setRaceConstitution(incCharacterStats.get("conBonus"));
+        setRaceCharisma(incCharacterStats.get("chaBonus"));
+        //Setting Sub-Race Stats
+        setSubRaceStrength(incCharacterStats.get("strSRBonus"));
+        setSubRaceDexterity(incCharacterStats.get("dexSRBonus"));
+        setSubRaceIntelligence(incCharacterStats.get("intSRBonus"));
+        setSubRaceWisdom(incCharacterStats.get("wisSRBonus"));
+        setSubRaceConstitution(incCharacterStats.get("conSRBonus"));
+        setSubRaceCharisma(incCharacterStats.get("chaSRBonus"));
+
+    }
+    //Setting the name
+    private void setName(String incName){
+        name = incName;
+    }
+    //Setting the Race
+    private void setRace(String incRace){
+        race = incRace;
+    }
+    // Setting Race HP Bonus
+    private void setRaceHPBonus(int incRaceHPBonus){
+        raceHPBonus = incRaceHPBonus;
+    }
     // Setting the base stats
     private void setBaseStrength(int incSTR){
         baseSTR = incSTR;
