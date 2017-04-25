@@ -43,8 +43,8 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
     private int raceHPBonus = 0;
     private String race = "";
     private String characterName = "";
-    private HashMap<String, Integer> createCharacterStats;
-    private HashMap<String, String> createCharacterInformation;
+    private HashMap<String, Integer> createCharacterStats = new HashMap<>();
+    private HashMap<String, String> createCharacterInformation = new HashMap<>();
 
     /**
      * This method is called from within the constructor to initialize the form.
