@@ -61,6 +61,7 @@ public class Character {
     
     //Constructor
     public Character(HashMap<String, String> incCharacterInfo, HashMap<String, Integer> incCharacterStats){
+
         //Strings
         setName(incCharacterInfo.get("name"));
         setRace(incCharacterInfo.get("race"));
@@ -86,8 +87,8 @@ public class Character {
         setSubRaceWisdom(incCharacterStats.get("wisSRBonus"));
         setSubRaceConstitution(incCharacterStats.get("conSRBonus"));
         setSubRaceCharisma(incCharacterStats.get("chaSRBonus"));
+
     }
-    
     //Setting the name
     private void setName(String incName){
         name = incName;
