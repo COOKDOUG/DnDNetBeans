@@ -16,6 +16,7 @@ public class Character {
     private String subRace;
     
     private int maxHitPoints;
+    private int hitDie;
     private int currentHitPoints;
     private int raceHPBonus;
     private int strength;
@@ -33,6 +34,14 @@ public class Character {
     private int baseWIS;
     private int baseCON;
     private int baseCHA;
+    
+    // Modifiers
+    private int strMod;
+    private int dexMod;
+    private int conMod;
+    private int intMod;
+    private int wisMod;
+    private int chaMod;
     
     // Race Bonuses
     private int raceSTRBonus;
@@ -62,25 +71,29 @@ public class Character {
     //Constructor
     public Character(HashMap<String, String> incCharacterInfo, HashMap<String, Integer> incCharacterStats){
 
-        //Strings
+        // Strings
         setName(incCharacterInfo.get("name"));
         setRace(incCharacterInfo.get("race"));
-        //Integers
+        // Hit Point related items
         setRaceHPBonus(incCharacterStats.get("raceHPBonus"));
+        setHitDie(incCharacterStats.get("hitDie"));
+        setMaxHitPoints();
+        setCurrentHitPointstoMax(maxHitPoints);
+        // Base values
         setBaseStrength(incCharacterStats.get("strBaseVal"));
         setBaseDexterity(incCharacterStats.get("dexBaseVal"));
         setBaseIntelligence(incCharacterStats.get("intBaseVal"));
         setBaseWisdom(incCharacterStats.get("wisBaseVal"));
         setBaseConstitution(incCharacterStats.get("conBaseVal"));
         setBaseCharisma(incCharacterStats.get("chaBaseVal"));
-        //Setting Race Stats
+        // Setting Race Stats
         setRaceStrength(incCharacterStats.get("strBonus"));
         setRaceDexterity(incCharacterStats.get("dexBonus"));
         setRaceIntelligence(incCharacterStats.get("intBonus"));
         setRaceWisdom(incCharacterStats.get("wisBonus"));
         setRaceConstitution(incCharacterStats.get("conBonus"));
         setRaceCharisma(incCharacterStats.get("chaBonus"));
-        //Setting Sub-Race Stats
+        // Setting Sub-Race Stats
         setSubRaceStrength(incCharacterStats.get("strSRBonus"));
         setSubRaceDexterity(incCharacterStats.get("dexSRBonus"));
         setSubRaceIntelligence(incCharacterStats.get("intSRBonus"));
@@ -97,9 +110,29 @@ public class Character {
     private void setRace(String incRace){
         race = incRace;
     }
+    // Setting the Hit Die
+    private void setHitDie(int incHitDie){
+        hitDie = incHitDie;
+    }
     // Setting Race HP Bonus
     private void setRaceHPBonus(int incRaceHPBonus){
         raceHPBonus = incRaceHPBonus;
+    }
+    // Setting the Max Hit Points
+    private void setMaxHitPoints(){
+        maxHitPoints = hitDie + ((raceHPBonus + conMod) * level) ;
+    }
+    // Setting the Current Hit Points
+    public void reduceCurrentHitPoints(int reducedHitPoints){
+        currentHitPoints = currentHitPoints - reducedHitPoints;
+    }
+    // Setting the Current Hit Points
+    private void increaseCurrentHitPoints(int increasedHitPoints){
+        currentHitPoints = currentHitPoints + increasedHitPoints;
+    }
+    // Setting the Hit Die
+    private void setCurrentHitPointstoMax(int incCurrentHitPoints){
+        currentHitPoints = incCurrentHitPoints;
     }
     // Setting the base stats
     private void setBaseStrength(int incSTR){
@@ -180,12 +213,6 @@ public class Character {
     private void setCharisma(){
         charisma = baseCHA + raceCHABonus + srCHABonus + tempCHA;
     }
-        
-    // Set Hit Points
-    private void setMaxHitPoints(){
-        maxHitPoints = srHPBonus + maxHitPoints;
-    }
- 
     
     // Getting the stats
     private int getStrength(){
