@@ -40,11 +40,18 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
     private int intSRBonus = 0;
     private int wisSRBonus = 0;
     private int chaSRBonus = 0;
+    private int strMod = 0;
+    private int dexMod = 0;
+    private int conMod = 0;
+    private int intMod = 0;
+    private int wisMod = 0;
+    private int chaMod = 0;
     private int raceHPBonus = 0;
     private String race = "";
     private String characterName = "";
     private HashMap<String, Integer> createCharacterStats = new HashMap<>();
     private HashMap<String, String> createCharacterInformation = new HashMap<>();
+    public Character createdCharacter;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -642,12 +649,18 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
         setHPMax();
     }
     private void setModifiers(){
-        strModField.setText(createModifier(Integer.parseInt(strengthField.getText())));
-        dexModField.setText(createModifier(Integer.parseInt(dexterityField.getText())));
-        conModField.setText(createModifier(Integer.parseInt(constitutionField.getText())));
-        intModField.setText(createModifier(Integer.parseInt(intellectField.getText())));
-        wisModField.setText(createModifier(Integer.parseInt(wisdomField.getText())));
-        chaModField.setText(createModifier(Integer.parseInt(charismaField.getText())));
+        strMod = Integer.parseInt(createModifier(Integer.parseInt(strengthField.getText())));
+        dexMod = Integer.parseInt(createModifier(Integer.parseInt(dexterityField.getText())));
+        conMod = Integer.parseInt(createModifier(Integer.parseInt(constitutionField.getText())));
+        intMod = Integer.parseInt(createModifier(Integer.parseInt(intellectField.getText())));
+        wisMod = Integer.parseInt(createModifier(Integer.parseInt(wisdomField.getText())));
+        chaMod = Integer.parseInt(createModifier(Integer.parseInt(charismaField.getText())));
+        strModField.setText(String.valueOf(strMod));
+        dexModField.setText(String.valueOf(dexMod));
+        conModField.setText(String.valueOf(conMod));
+        intModField.setText(String.valueOf(intMod));
+        wisModField.setText(String.valueOf(wisMod));
+        chaModField.setText(String.valueOf(chaMod));
     }
     private int setStats(){
 	d6 six = new d6();
@@ -932,6 +945,7 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
     private void createCharacter(){
         //Creating the Integer Array for the Character Class
         createCharacterStats.put("raceHPBonus",raceHPBonus);
+        createCharacterStats.put("hitDie",hitDieMax);
         //Setting Base Stats
         createCharacterStats.put("strBaseVal",strBaseVal);
         createCharacterStats.put("dexBaseVal",dexBaseVal);
@@ -953,11 +967,18 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
         createCharacterStats.put("wisSRBonus",wisSRBonus);
         createCharacterStats.put("conSRBonus",conSRBonus);
         createCharacterStats.put("chaSRBonus",chaSRBonus);
+        //Setting Sub-Race Stats
+        createCharacterStats.put("strMod",strMod);
+        createCharacterStats.put("dexMod",dexMod);
+        createCharacterStats.put("conMod",conMod);
+        createCharacterStats.put("intMod",intMod);
+        createCharacterStats.put("wisMod",wisMod);
+        createCharacterStats.put("chaMod",chaMod);
         
         //Creating the String Array for the Character Class
         createCharacterInformation.put("name",name.toString());
         createCharacterInformation.put("race", race);
-        Character createdCharacter = new Character(createCharacterInformation, createCharacterStats);
+        createdCharacter = new Character(createCharacterInformation, createCharacterStats);
         /*
             hitDieMax;
             maxHitPoints;
