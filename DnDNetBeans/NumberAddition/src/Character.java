@@ -14,6 +14,8 @@ public class Character {
     private String name;
     private String race;
     private String subRace;
+    private String raceExplanation;
+    private String subRaceExplanation;
     
     private int maxHitPoints;
     private int hitDie;
@@ -74,6 +76,8 @@ public class Character {
         // Strings
         setName(incCharacterInfo.get("name"));
         setRace(incCharacterInfo.get("race"));
+        setRaceExplanation(incCharacterInfo.get("raceExplanation")) ;
+        setSubRaceExplanation(incCharacterInfo.get("subRaceExplanation"));
         // Hit Point related items
         setRaceHPBonus(incCharacterStats.get("raceHPBonus"));
         setHitDie(incCharacterStats.get("hitDie"));
@@ -109,6 +113,16 @@ public class Character {
     //Setting the Race
     private void setRace(String incRace){
         race = incRace;
+    }
+    //Setting the Race Explanation
+    private void setRaceExplanation(String incRaceExplanation){
+        raceExplanation = incRaceExplanation;
+        System.out.println(raceExplanation);
+    }
+    //Setting the Sub Race Explanation
+    private void setSubRaceExplanation(String incSubRaceExplanation){
+        subRaceExplanation = incSubRaceExplanation;
+        System.out.println(subRaceExplanation);
     }
     // Setting the Hit Die
     private void setHitDie(int incHitDie){
