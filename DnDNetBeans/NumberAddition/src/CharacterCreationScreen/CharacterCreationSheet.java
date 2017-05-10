@@ -975,9 +975,12 @@ public class CharacterCreationSheet extends javax.swing.JFrame {
         createCharacterStats.put("wisMod",wisMod);
         createCharacterStats.put("chaMod",chaMod);
         
+        
         //Creating the String Array for the Character Class
         createCharacterInformation.put("name",name.toString());
         createCharacterInformation.put("race", race);
+        createCharacterInformation.put("raceExplanation",racialAdjustmentsTextArea.getText());
+        createCharacterInformation.put("subRaceExplanation",subRaceTextArea.getText());
         createdCharacter = new Character(createCharacterInformation, createCharacterStats);
         /*
             hitDieMax;
